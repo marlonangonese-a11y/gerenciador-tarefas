@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Gerenciamento de Tarefas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-titulo">
+      <h1>TaskFlow</h1>
+      <span class="versao" title="Versão atual do sistema (SemVer)">v0.1.0</span>
+    </div>
+    <button id="btn-nova-tarefa" class="btn btn-primario">+ Nova tarefa</button>
+  </header>
+
+  <main id="quadro" class="quadro" aria-live="polite">
+    <!-- Colunas e tarefas renderizadas via JavaScript -->
+    <p class="carregando">Carregando quadro…</p>
+  </main>
+
+  <!-- Modal de criação / edição de tarefa -->
+  <dialog id="modal-tarefa" class="modal">
+    <form id="form-tarefa" method="dialog">
+      <h2 id="modal-titulo">Nova tarefa</h2>
+
+      <label for="campo-titulo">Título</label>
+      <input id="campo-titulo" name="titulo" type="text" maxlength="120" required
+             placeholder="Ex.: Definir itens de configuração" />
+
+      <label for="campo-descricao">Descrição</label>
+      <textarea id="campo-descricao" name="descricao" rows="3"
+                placeholder="Detalhes da tarefa (opcional)"></textarea>
+
+      <div class="modal-linha">
+        <div>
+          <label for="campo-prioridade">Prioridade</label>
+          <select id="campo-prioridade" name="prioridade">
+            <option value="baixa">Baixa</option>
+            <option value="media" selected>Média</option>
+            <option value="alta">Alta</option>
+          </select>
+        </div>
+        <div>
+          <label for="campo-coluna">Coluna</label>
+          <select id="campo-coluna" name="coluna_id"></select>
+        </div>
+      </div>
+
+      <p id="modal-erro" class="modal-erro" hidden></p>
+
+      <div class="modal-acoes">
+        <button type="button" id="btn-cancelar" class="btn btn-secundario">Cancelar</button>
+        <button type="submit" id="btn-salvar" class="btn btn-primario">Salvar tarefa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

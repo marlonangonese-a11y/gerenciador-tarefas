@@ -1,0 +1,274 @@
+/* ============================================================
+   TaskFlow — Sistema de Gerenciamento de Tarefas Web
+   Arquivo: css/estilos.css
+   Responsável: Marlon (frontend)
+
+   Identidade visual:
+   - Fundo claro azulado, tinta escura, acento âmbar
+   - IDs de tarefa em fonte mono (rastreabilidade — tema GCS)
+   ============================================================ */
+
+:root {
+  --fundo: #eef1f6;
+  --tinta: #1c2536;
+  --tinta-suave: #5a6679;
+  --cartao: #ffffff;
+  --borda: #d8dee9;
+  --acento: #0e7490;        /* ações primárias */
+  --acento-escuro: #0b5c73;
+  --ambar: #e8a33d;         /* destaque do cabeçalho */
+  --alta: #dc4c3f;
+  --media: #e8a33d;
+  --baixa: #5b8c5a;
+
+  --fonte-titulo: "Archivo", system-ui, sans-serif;
+  --fonte-texto: "Inter", system-ui, sans-serif;
+  --fonte-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fonte-texto);
+  background: var(--fundo);
+  color: var(--tinta);
+  min-height: 100vh;
+}
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--tinta);
+  color: #fff;
+  border-bottom: 3px solid var(--ambar);
+}
+
+.topo-titulo { display: flex; align-items: baseline; gap: 0.6rem; }
+
+.topo h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.versao {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--ambar);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  font-family: var(--fonte-texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:focus-visible { outline: 2px solid var(--ambar); outline-offset: 2px; }
+
+.btn-primario { background: var(--acento); color: #fff; }
+.btn-primario:hover { background: var(--acento-escuro); }
+
+.btn-secundario { background: transparent; color: var(--tinta-suave); }
+.btn-secundario:hover { color: var(--tinta); }
+
+/* ---------- Quadro ---------- */
+.quadro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.carregando { color: var(--tinta-suave); padding: 2rem; }
+
+.coluna {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 220px;
+}
+
+.coluna.arrastando-sobre {
+  border-color: var(--acento);
+  background: rgba(14, 116, 144, 0.06);
+}
+
+.coluna-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.15rem 0.25rem;
+}
+
+.coluna-cabecalho h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tinta-suave);
+}
+
+.coluna-contador {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--tinta-suave);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+}
+
+/* ---------- Cartões de tarefa ---------- */
+.cartao {
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  cursor: grab;
+  box-shadow: 0 1px 2px rgba(28, 37, 54, 0.06);
+}
+
+.cartao:active { cursor: grabbing; }
+.cartao.arrastando { opacity: 0.45; }
+
+.cartao[data-prioridade="alta"]  { border-left-color: var(--alta); }
+.cartao[data-prioridade="media"] { border-left-color: var(--media); }
+.cartao[data-prioridade="baixa"] { border-left-color: var(--baixa); }
+
+.cartao-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.cartao-id {
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  color: var(--tinta-suave);
+}
+
+.cartao-acoes { display: flex; gap: 0.25rem; }
+
+.cartao-acoes button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+}
+
+.cartao-acoes button:hover { background: var(--fundo); color: var(--tinta); }
+
+.cartao h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+
+.cartao p {
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+  line-height: 1.4;
+}
+
+.coluna-vazia {
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+  text-align: center;
+  padding: 1rem 0;
+  border: 1px dashed var(--borda);
+  border-radius: 8px;
+}
+
+/* ---------- Modal ---------- */
+.modal {
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: min(440px, 92vw);
+  box-shadow: 0 12px 40px rgba(28, 37, 54, 0.25);
+}
+
+.modal::backdrop { background: rgba(28, 37, 54, 0.45); }
+
+.modal h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.modal label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  margin: 0.7rem 0 0.25rem;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  width: 100%;
+  font-family: var(--fonte-texto);
+  font-size: 0.88rem;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  background: #fff;
+  color: var(--tinta);
+}
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+}
+
+.modal-linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.modal-erro {
+  color: var(--alta);
+  font-size: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+/* ---------- Acessibilidade / movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+@media (max-width: 640px) {
+  .quadro { grid-template-columns: 1fr; }
+}
